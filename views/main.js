@@ -29,7 +29,7 @@ var channelMine = null;
     username = cleanInput($usernameInput.val().trim());
     channelName = $("#roomname").val();
     socketExt = new SocketExt (null, SOCKETIO_URL, true);
-    socketExt.setKeys(username, '123456789', '123');
+    socketExt.setKeys(username, '123456789', '234');
     channel = socketExt.subscribe(channelName);
 
       // channel.bind('login', (data) => {
@@ -39,6 +39,10 @@ var channelMine = null;
       //     prepend: true
       //   });
       // });
+
+      channel.bind('ss_newconnection_err', () => {
+        alert ("connecect error");
+      });
 
       channel.bind('message', (data) => {
         addChatMessage(data);
@@ -72,7 +76,7 @@ var channelMine = null;
 
       channel.bind('ss_disconnect', (data) => {
         userPubId = data.user_pub_id;
-        log(userPubId + ' have been disconnected');
+        log(userPubId + ' has been disconnected');
       });
 
       channel.bind('ss_newconnection', (data) => {

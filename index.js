@@ -8,19 +8,17 @@ var options = {
 };
 var server = https.createServer(options, app);
 // var io = require('socket.io')(server, { origins: '*:*'});
-var io = require('socket.io-client');
-var { SocketLib, SocketExt } = require('./lib/socketlib.js');
-
 app.use(express.static('views'));
 app.use(express.urlencoded());
 app.use(express.json());
 
-
 var port = process.env.PORT || 3000;
-
 server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
+
+var io = require('socket.io-client');
+var { SocketExt } = require('./lib/socketlib.js');
 
 const SOCKETIO_URL = "wss://localhost:4000";
 
