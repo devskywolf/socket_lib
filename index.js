@@ -9,7 +9,7 @@ var options = {
 var server = https.createServer(options, app);
 // var io = require('socket.io')(server, { origins: '*:*'});
 app.use(express.static('views'));
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
 var port = process.env.PORT || 3000;

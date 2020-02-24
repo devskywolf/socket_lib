@@ -29,67 +29,55 @@ var channelMine = null;
     username = cleanInput($usernameInput.val().trim());
     channelName = $("#roomname").val();
     socketExt = new SocketExt (null, SOCKETIO_URL, true);
-    socketExt.setKeys(username, '123456789', '234');
+    socketExt.setKeys(username, '123456789', '123');
     channel = socketExt.subscribe(channelName);
 
-      // channel.bind('login', (data) => {
-      //   connected = true;
-      //   var message = "Welcome to Socket.IO Testing";
-      //   log(message, {
-      //     prepend: true
-      //   });
-      // });
+    channel.bind('newconnection_err', () => {
+      console.log("connection error");
+    });
 
-      channel.bind('ss_newconnection_err', () => {
-        alert ("connecect error");
-      });
+    channel.bind('message', (data) => {
+      addChatMessage(data);
+    });
 
-      channel.bind('message', (data) => {
-        addChatMessage(data);
-      });
-      //channel1.bind('message', (data) => {
-      //  addChatMessage(data);
-      //});
-      
+    channel.bind('user_joined', (data) => {
+      log(data.username + ' joined into ' + channelName);
+    });
 
-      channel.bind('user_joined', (data) => {
-        log(data.username + ' joined into ' + channelName);
-      });
+    channel.bind('user_left', (data) => {
+      log(data.username + ' left');
+      addParticipantsMessage(data);
+      removeChatTyping(data);
+    });
 
-      channel.bind('user_left', (data) => {
-        log(data.username + ' left');
-        addParticipantsMessage(data);
-        removeChatTyping(data);
-      });
+    channel.bind('typing', (data) => {
+      addChatTyping(data);
+    });
 
-      channel.bind('typing', (data) => {
-        addChatTyping(data);
-      });
+    channel.bind('stop_typing', (data) => {
+      removeChatTyping(data);
+    });
 
-      channel.bind('stop_typing', (data) => {
-        removeChatTyping(data);
-      });
+    channel.bind('ss_disconnect_me', () => {
+      log('you have been disconnected');
+    });
 
-      channel.bind('ss_disconnect_me', () => {
-        log('you have been disconnected');
-      });
+    channel.bind('ss_disconnect', (data) => {
+      userPubId = data.user_pub_id;
+      log(userPubId + ' has been disconnected');
+    });
 
-      channel.bind('ss_disconnect', (data) => {
-        userPubId = data.user_pub_id;
-        log(userPubId + ' has been disconnected');
-      });
+    channel.bind('ss_newconnection', (data) => {
+      var userPubId = data.user_pub_id;
+      connected = true;
+      if (username === userPubId) {
+        postMessage('add_user', channelName, {'username':username});
+      }
+    });
 
-      channel.bind('ss_newconnection', (data) => {
-        var userPubId = data.user_pub_id;
-        connected = true;
-        if (username === userPubId) {
-          postMessage('add_user', channelName, {'username':username});
-        }
-      });
-
-      channel.bind('reconnect_error', () => {
-        log('attempt to reconnect has failed');
-      });
+    channel.bind('reconnect_error', () => {
+      log('attempt to reconnect has failed');
+    });
     if (username) {
       $loginPage.fadeOut();
       $chatPage.show();

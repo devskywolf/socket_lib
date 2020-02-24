@@ -9,9 +9,8 @@ var options = {
 };
 var server = https.createServer(options, app);
 app.use(express.static('views'));
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
-
 
 var port = process.env.PORT || 4000;
 server.listen(port, () => {
@@ -19,7 +18,7 @@ server.listen(port, () => {
 });
 
 var io = require('socket.io')(server, {origins: '*:*',path : '/socket_server'});
-var { SocketLib } = require('./lib/socketlib.js');
+var { SocketLib, DATA_TYPE } = require('./lib/socketlib.js');
 
 var socketLib = new SocketLib(io, "123456789");
 
