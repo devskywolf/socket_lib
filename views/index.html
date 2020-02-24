@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket.IO Test Example</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div>
+    <ul class="pages">
+      <li class="test page">
+        <div class="chatArea">
+          <ul class="messages"></ul>
+        </div>
+        <input class="inputMessage" placeholder="Type here..."/>
+      </li>
+      <li class="login page">
+        <div class="form">
+          <h3 class="title">Room Name ?</h3>
+          <select class="roomname" id="roomname">
+            <option value="room1">room1</option>
+            <option value="room2">room2</option>
+            <option value="room3">room3</option>
+          </select>
+          <h3 class="title">What is your name ?</h3>
+          <input class="usernameInput" type="text" maxlength="14" />
+        </div>
+      </li>
+    </ul>
+  </div>
+ 
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="socket-ext.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

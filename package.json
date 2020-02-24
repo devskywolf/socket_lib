@@ -1,0 +1,32 @@
+{
+  "name": "simple-server-node",
+  "version": "1.0.0",
+  "description": "A simple Expressjs Web server on balena",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balena-io-projects/simple-server-node.git"
+  },
+  "keywords": [
+    "webserver",
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "Shaun Mulligan <shaun@balena.io>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/balena-io-projects/simple-server-node/issues"
+  },
+  "homepage": "https://github.com/balena-io-projects/simple-server-node#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "*",
+    "express": "*",
+    "pako": "^1.0.11",
+    "socket.io": "^2.3.0"
+  }
+}
