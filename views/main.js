@@ -1,6 +1,6 @@
-// const SERVER_URL = "62.23.208.221";
-const SERVER_URL = "192.168.207.216";
-const port = 3000;
+const SERVER_URL = "62.23.208.221";
+// const SERVER_URL = "localhost";
+const port = 80;
 const SOCKETIO_URL = "ws://" + SERVER_URL + ":" + port;
 
 var FADE_TIME = 150; // ms
