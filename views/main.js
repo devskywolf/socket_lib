@@ -1,4 +1,4 @@
-const SERVER_URL = "localhost";
+const SERVER_URL = "62.23.208.221";
 const port = 3000;
 const SOCKETIO_URL = "wss://" + SERVER_URL + ":" + port;
 

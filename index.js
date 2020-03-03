@@ -12,7 +12,9 @@ app.use(express.static('views'));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
-const SERVER_URL = "localhost";
+//const SERVER_URL = "localhost";
+const SERVER_URL = "62.23.208.221";
+
 const port = process.env.PORT || 3000;
 const SOCKETIO_URL = "wss://" + SERVER_URL + ":" + port;
 server.listen(port, () => {
