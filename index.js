@@ -1,22 +1,21 @@
 var express = require('express');
 var fs = require('fs');
 var app = express();
-var https = require('http');
-// var options = {
-//   key: fs.readFileSync('./cert/key.pem'),
-//   cert: fs.readFileSync('./cert/cert.crt')
-// };
-var server = https.createServer(app);
-// var io = require('socket.io')(server, { origins: '*:*'});
+var https = require('https');
+var options = {
+  key: fs.readFileSync('./cert/key.pem'),
+  cert: fs.readFileSync('./cert/cert.crt')
+};
+var server = https.createServer(options, app);
 app.use(express.static('views'));
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
-//const SERVER_URL = "localhost";
-const SERVER_URL = "62.23.208.221";
+const SERVER_URL = "localhost";
+// const SERVER_URL = "62.23.208.221";
 
-const port = process.env.PORT || 80;
-const SOCKETIO_URL = "ws://" + SERVER_URL + ":" + port;
+const port = process.env.PORT || 3000;
+const SOCKETIO_URL = "wss://" + SERVER_URL + ":" + port;
 server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
