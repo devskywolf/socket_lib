@@ -1,6 +1,7 @@
-const SERVER_URL = "62.23.208.221";
+// const SERVER_URL = "62.23.208.221";
+const SERVER_URL = "192.168.207.216";
 const port = 3000;
-const SOCKETIO_URL = "wss://" + SERVER_URL + ":" + port;
+const SOCKETIO_URL = "ws://" + SERVER_URL + ":" + port;
 
 var FADE_TIME = 150; // ms
 var TYPING_TIMER_LENGTH = 400; // ms
